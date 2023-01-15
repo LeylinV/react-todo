@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useMemo, useState} from 'react'
+import './styles/App.css'
+import CardList from "./components/CardList";
+import MyModal from "./components/Modal/MyModal";
+import CardCreator from "./components/CardCreator";
 
 function App() {
+    const [cardList, setCardList] = useState([])
+
+    const [visible, setVisible] = useState(false)
+
+    const createTask = (nameCard, tasksCard) => {
+        setCardList([...cardList, {
+            name: nameCard,
+            tasks: tasksCard,
+            posX: `${30+(cardList.length)*250}`,
+            posY: `${30+(Math.floor(cardList.length/5))*500}`}
+        ])
+    }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <header className="header">
+            <button onClick={() => setVisible(true)}>+</button>
+        </header>
+        <CardList />
+        <MyModal
+            visible={visible}
+            setVisible={setVisible}
         >
-          Learn React
-        </a>
-      </header>
+            <CardCreator createTask={createTask} setVisible={setVisible}/>
+        </MyModal>
     </div>
   );
 }
