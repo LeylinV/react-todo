@@ -5,7 +5,7 @@ const CardCreator = ({createTask, setVisible}) => {
     const [tasksList, setTasksList] = useState([''])
 
     const createButton = () =>{
-        createTask(cardName, tasksList)
+        createTask(cardName, tasksList.filter(task => task))
         setVisible(false)
         setCardName('')
         setTasksList([''])
@@ -35,7 +35,7 @@ const CardCreator = ({createTask, setVisible}) => {
                     : <></>
                 }
             </div>
-            <button className="card-creator-button-create" onClick={e => createButton}>Создать</button>
+            <button className="card-creator-button-create" onClick={createButton}>Создать</button>
         </div>
     );
 };

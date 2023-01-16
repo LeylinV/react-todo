@@ -1,9 +1,14 @@
 import React from 'react';
+import Card from "./Card";
 
-const CardList = () => {
+const CardList = ({cardList,setCardList}) => {
+
+
     return (
-        <div>
-            
+        <div className="card-list">
+            {cardList.map((card, index)=>
+                <Card key={index} card={card} cardList={cardList} setCardList={setCardList}/>
+            )}
         </div>
     );
 };
